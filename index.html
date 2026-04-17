@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Planner App</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.container{
+background:white;
+width:100%;
+max-width:420px;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:#333;
+margin-bottom:20px;
+}
+
+.input-box{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+input{
+flex:1;
+padding:12px;
+border:2px solid #ddd;
+border-radius:10px;
+outline:none;
+font-size:16px;
+}
+
+button{
+padding:12px 16px;
+border:none;
+background:#2575fc;
+color:white;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#1d63d1;
+}
+
+ul{
+list-style:none;
+}
+
+li{
+background:#f3f6ff;
+padding:12px;
+margin-bottom:10px;
+border-radius:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+li.completed{
+text-decoration:line-through;
+opacity:0.6;
+}
+
+.task-buttons{
+display:flex;
+gap:8px;
+}
+
+.small-btn{
+padding:6px 10px;
+font-size:12px;
+}
+
+.delete{
+background:#ff4d4d;
+}
+
+.complete{
+background:#28a745;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>📚 Study Planner</h1>
+
+<div class="input-box">
+<input type="text" id="taskInput" placeholder="Enter study task">
+<button onclick="addTask()">Add</button>
+</div>
+
+<ul id="taskList"></ul>
+</div>
+
+<script>
+function addTask(){
+let input=document.getElementById("taskInput");
+let task=input.value.trim();
+
+if(task===""){
+alert("Please enter a task");
+return;
+}
+
+let li=document.createElement("li");
+li.innerHTML=`
+<span>${task}</span>
+<div class="task-buttons">
+<button class="small-btn complete" onclick="completeTask(this)">Done</button>
+<button class="small-btn delete" onclick="deleteTask(this)">Delete</button>
+</div>
+`;
+
+document.getElementById("taskList").appendChild(li);
+input.value="";
+}
+
+function deleteTask(btn){
+btn.parentElement.parentElement.remove();
+}
+
+function completeTask(btn){
+btn.parentElement.parentElement.classList.toggle("completed");
+}
+</script>
+
+</body>
+</html>
